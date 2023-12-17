@@ -12,20 +12,22 @@ function Navbar() {
         <nav className='bg-slate-900 flex items-center py-3 justify-between px-24 text-white'>
             <div className="flex items-center gap-4"> {/* Agregado contenedor flex con gap */}
             <Image src='/logo.png' alt="Logo" width={40} height={40} className='rounded-full cursor-pointer' />
-                <Link href="/">
-                    <h1>
-                        Aldea Lúdica
-                    </h1>
+                <Link href="/" legacyBehavior>
+                    <a className="text-xl font-bold">Aldea Lúdica</a>
                 </Link>
-                <Link href="/userdata">
-                    Datos de usuario
-                </Link>
+                {session?.user && ( // Solo mostrar si el usuario ha iniciado sesión
+                    <Link href="/userdata" legacyBehavior>
+                        <a className="hover:text-sky-400 transition duration-300 ease-in-out cursor-pointer">Datos de usuario</a>
+                    </Link>
+                )}
+                {session?.user && ( // Solo mostrar si el usuario ha iniciado sesión
+                    <Link href="/partidas" legacyBehavior>
+                        <a className="hover:text-sky-400 transition duration-300 ease-in-out cursor-pointer">Partidas</a>
+                    </Link>
+                )}
             </div>
             {session?.user ? (
                 <div className='flex gap-x-2 items-center'>
-                    <Link href="/partidas">
-                        Partidas
-                    </Link>
                     <p>{session.user.name} {session.user.email}</p>
                     {session.user.image && (
                         <Image src={session.user.image} alt="User Image" width={40} height={40} className='rounded-full cursor-pointer' />

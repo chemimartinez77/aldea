@@ -1,6 +1,6 @@
 import { supabase } from '../../pages/api/supabaseClient'
 
-const addUser = async (email, name) => {
+const addUser = async (email: string, name: string) => {
     const { data, error } = await supabase
         .from('users')
         .insert([
