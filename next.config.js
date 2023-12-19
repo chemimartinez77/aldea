@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        remotePatterns: [
-            {protocol: 'https', hostname: 'lh3.googleusercontent.com'},
-        ]
+      remotePatterns: [
+        { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
+        { protocol: 'https', hostname: 'cf.geekdo-images.com' }, // Agrega esta línea
+      ],
     },
-    // puedes tener otras configuraciones aquí
-  }
+    // ... otras configuraciones ...
+  };
   
-  module.exports = nextConfig
+  module.exports = nextConfig;
+  

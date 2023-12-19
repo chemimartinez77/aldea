@@ -3,10 +3,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { signIn, useSession, signOut } from 'next-auth/react'
+import { addUserIfNotExist } from '../utils/supabase-utils'
+import { useEffect } from 'react'
 
 function Navbar() {
 
     const { data: session } = useSession()
+
+    useEffect(() => {
+        // Asegúrese de que el usuario está definido y que tanto el email como el name son strings no vacíos.
+        if (session?.user?.email && typeof session.user.email === 'string' &&
+            session?.user?.name && typeof session.user.name === 'string') {
+            addUserIfNotExist(session.user.email, session.user.name);
+        }
+    }, [session])
 
     return (
         <nav className='bg-slate-900 flex items-center py-3 justify-between px-24 text-white'>

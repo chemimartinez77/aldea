@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* En su archivo CSS global o un módulo CSS */
+.game-image {
+    max-height: 100px;
+    width: 60px;
+    object-fit: contain;
+    background: white;
+    border: 1px solid black;
+    box-shadow: 4px 4px 4px lightgrey;
+}
+

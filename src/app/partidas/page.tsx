@@ -12,8 +12,13 @@ import InputAdornment from '@mui/material/InputAdornment'
 import Typography from '@mui/material/Typography'
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
+import Image from 'next/image'
 
-
+interface GameResult {
+    name: string;
+    yearPublished: number;
+    imageUrl?: string;
+}
 
 const PartidasPage = () => {
     const [formData, setFormData] = useState({
@@ -31,7 +36,7 @@ const PartidasPage = () => {
         authorization: false,
     });
 
-    const [gameResults, setGameResults] = useState([])
+    const [gameResults, setGameResults] = useState<GameResult[]>([])
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = event.target;
@@ -84,41 +89,6 @@ const PartidasPage = () => {
                             ),
                         }}
                     />
-                    {/* Aquí renderizamos los resultados de la búsqueda
-                    {gameResults.length > 0 && (
-                        <Box>
-                            {gameResults.map((game, index) => (
-                                <Box mb={2} key={index}>
-                                    <Grid container key={index} spacing={2} alignItems="center">
-                                        <Grid item>
-                                            <img 
-                                                src={game.imageUrl ? game.imageUrl : '/noimg.jpg'} 
-                                                alt={game.name} 
-                                                style={{ 
-                                                    maxHeight: '100px', 
-                                                    width: '60px',
-                                                    objectFit: 'contain',
-                                                    background: 'white',
-                                                    border: '1px solid black',
-                                                    boxShadow: '4px 4px 4px lightgrey'
-                                                }} 
-                                            />
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography variant="body1" component="span" style={{ fontWeight: 'bold' }}>
-                                                {game.name}
-                                            </Typography>
-                                            <Typography variant="body1" component="span">
-                                                {` (${game.yearPublished})`}
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            ))}
-                        </Box>
-                    )} */}
-
-
                     <TextField
                         required
                         name="title"
@@ -283,18 +253,14 @@ const PartidasPage = () => {
                                 <Box mb={2} key={index}>
                                     <Grid container key={index} spacing={2} alignItems="center">
                                         <Grid item>
-                                            <img 
-                                                src={game.imageUrl ? game.imageUrl : '/noimg.jpg'} 
-                                                alt={game.name} 
-                                                style={{ 
-                                                    maxHeight: '100px', 
-                                                    width: '60px',
-                                                    objectFit: 'contain',
-                                                    background: 'white',
-                                                    border: '1px solid black',
-                                                    boxShadow: '4px 4px 4px lightgrey'
-                                                }} 
-                                            />
+                                        <Image 
+                                            src={game.imageUrl ? game.imageUrl : '/noimg.jpg'} 
+                                            alt={game.name || "No image available"} // Gestión adecuada de alt en caso de que game.name no esté disponible
+                                            width={60} // Ancho de la imagen
+                                            height={100} // Altura de la imagen
+                                            objectFit="contain"
+                                            className="game-image" // Utilice className para estilos en lugar de inline styles
+                                        />
                                         </Grid>
                                         <Grid item>
                                             <Typography variant="body1" component="span" style={{ fontWeight: 'bold' }}>
